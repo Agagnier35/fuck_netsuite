@@ -42,18 +42,23 @@ const yargs = require("yargs");
     return;
   }
 
+  const browser = await puppeteer.launch({ headless: !argv.browser });
+  const page = await browser.newPage();
   try {
-    const browser = await puppeteer.launch({ headless: !argv.browser });
-    const page = await browser.newPage();
-
     await page.authenticate({
       username: argv.username,
       password: argv.password,
     });
 
-    await page.goto(
+    const res = await page.goto(
       "https://adfs.equisoft.com/adfs/ls/idpinitiatedsignon.aspx?loginToRp=http://www.netsuite.com/sp"
     );
+
+    if (res.status() === 401) {
+      console.log("Failed authentication");
+      browser.close();
+      return;
+    }
 
     // redirects console.logs to the node console
     page.on("console", (msg) => {
@@ -114,6 +119,8 @@ const yargs = require("yargs");
     }
 
     console.log("All days submitted, exiting");
-    await browser.close();
-  } catch (e) {}
+  } catch (e) {
+    console.log(e);
+  }
+  await browser.close();
 })();
