@@ -1,0 +1,23 @@
+{
+  "name": "fuck_netsuite",
+  "version": "1.0.0",
+  "description": "fuck_netsuite",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Agagnier35/fuck_netsuite.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Agagnier35/fuck_netsuite/issues"
+  },
+  "homepage": "https://github.com/Agagnier35/fuck_netsuite#readme",
+  "dependencies": {
+    "puppeteer": "^5.5.0",
+    "yargs": "^16.2.0"
+  }
+}
